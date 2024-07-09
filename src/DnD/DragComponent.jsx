@@ -4,20 +4,6 @@ import { DndProvider, useDrag, useDrop } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import "./dnd.css";
 
-DraggableItem.propTypes = {
-	id: PropTypes.string.isRequired,
-	label: PropTypes.string.isRequired,
-};
-Dropzone.propTypes = {
-	items: PropTypes.arrayOf(
-		PropTypes.shape({
-			id: PropTypes.string.isRequired,
-			label: PropTypes.string.isRequired,
-		})
-	).isRequired,
-	onDrop: PropTypes.func.isRequired,
-};
-
 const id_gen = () => {
 	return Math.random().toString(36).substr(2, 9);
 };
@@ -39,7 +25,10 @@ const DraggableItem = ({ id, label }) => {
 		</div>
 	);
 };
-
+DraggableItem.propTypes = {
+	id: PropTypes.string.isRequired,
+	label: PropTypes.string.isRequired,
+};
 const Dropzone = ({ items, onDrop }) => {
 	const [{ isOver, canDrop }, drop] = useDrop({
 		accept: "ITEM",
@@ -66,6 +55,15 @@ const Dropzone = ({ items, onDrop }) => {
 			)}
 		</div>
 	);
+};
+Dropzone.propTypes = {
+	items: PropTypes.arrayOf(
+		PropTypes.shape({
+			id: PropTypes.string.isRequired,
+			label: PropTypes.string.isRequired,
+		})
+	).isRequired,
+	onDrop: PropTypes.func.isRequired,
 };
 
 const DragComponent = () => {
