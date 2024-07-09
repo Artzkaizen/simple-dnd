@@ -77,11 +77,15 @@ const DragComponent = () => {
 
 	const handleDrop = (zone, item) => {
 		if (zone === 1) {
-			setZone2Items((prevItems) => prevItems.filter((i) => i.id !== item.id));
-			setZone1Items((prevItems) => [...prevItems, item]);
+			if (!zone1Items.some((i) => i.id === item.id)) {
+				setZone2Items((prevItems) => prevItems.filter((i) => i.id !== item.id));
+				setZone1Items((prevItems) => [...prevItems, item]);
+			}
 		} else {
-			setZone1Items((prevItems) => prevItems.filter((i) => i.id !== item.id));
-			setZone2Items((prevItems) => [...prevItems, item]);
+			if (!zone2Items.some((i) => i.id === item.id)) {
+				setZone1Items((prevItems) => prevItems.filter((i) => i.id !== item.id));
+				setZone2Items((prevItems) => [...prevItems, item]);
+			}
 		}
 	};
 
